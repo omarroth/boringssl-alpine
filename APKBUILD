@@ -11,8 +11,8 @@ depends=""
 makedepends="cmake git go perl"
 install=""
 subpackages="$pkgname-dev $pkgname-doc"
-source="https://boringssl.googlesource.com/boringssl/+archive/fips-android-20191020.tar.gz"
-builddir="$srcdir/"
+source="bfe527f.tar.gz::https://github.com/google/boringssl/tarball/bfe527f"
+builddir="$srcdir/google-boringssl-bfe527f"
 
 prepare() {
 	cd "$builddir"
@@ -44,4 +44,4 @@ package() {
 #	install -Dm755 decrepit/libdecrepit.a "$pkgdir/usr/lib/libdecrepit.a"
 #	install -Dm755 libboringssl_gtest.a "$pkgdir/usr/lib/libboringssl_gtest.a"
 }
-sha512sums="9aa30d740bf46ba05c7b2277fb87e3a9c40cf09dc8c5a034c68c56e28ff8e0cbf5fb84151615ed334d1179408eea89230084c4da3c94bdd115c9f2cc746fd03f  fips-android-20191020.tar.gz"
+sha512sums="2c3a7029b4ba55146e2d911c90fdf805b10b9def594154f0567dd3003f415b56fec59d5d824ed5d616c3da9dba7d32aa52605d1a6901bdf5c087860bc009e3a4  bfe527f.tar.gz"
