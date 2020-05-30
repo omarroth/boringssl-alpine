@@ -1,37 +1,34 @@
 # Based on https://aur.archlinux.org/packages/boringssl-git/
 # Maintainer: Omar Roth <omarroth@protonmail.com>
-pkgname="boringssl"
-pkgver="1.1.0"
+pkgname=boringssl
+pkgver=1.1.0
 pkgrel=0
 pkgdesc="BoringSSL is a fork of OpenSSL that is designed to meet Google's needs"
 url="https://boringssl.googlesource.com/boringssl"
 arch="all"
 license="MIT"
-depends=""
+replaces="openssl libressl"
+depends="!openssl-libs-static"
+makedepends_host="linux-headers"
 makedepends="cmake git go perl"
-install=""
-subpackages="$pkgname-dev $pkgname-doc"
+subpackages="$pkgname-static $pkgname-dev $pkgname-doc"
 source="bfe527f.tar.gz::https://github.com/google/boringssl/tarball/bfe527f"
 builddir="$srcdir/google-boringssl-bfe527f"
 
 prepare() {
-	cd "$builddir"
-	cmake -DCMAKE_BUILD_TYPE=Release .
+	:
 }
 
 build() {
-	cd "$builddir"
+	cmake -DCMAKE_BUILD_TYPE=Release .
 	make ssl crypto
 }
 
 check() {
-	cd "$builddir"
-#	make all_tests
+	make all_tests
 }
 
 package() {
-	cd "$builddir"
-	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 	for i in *.md ; do
 		install -Dm644 $i "$pkgdir/usr/share/doc/$pkgname/$i"
 	done
